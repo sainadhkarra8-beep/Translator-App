@@ -47,7 +47,10 @@ if st.button("Translate"):
             source_code = languages[source_lang]
             target_code = languages[target_lang]
             translated = MyMemoryTranslator(source=source_code, target=target_code).translate(text)
-            st.subheader("Translated Text:")
-            st.success(translated)
+if translated and translated.strip():
+    st.subheader("Translated Text:")
+    st.success(translated)
+else:
+    st.warning("This language pair isn't supported right now. Try a different language.")
         except Exception as e:
             st.error(f"Translation failed: {e}")
