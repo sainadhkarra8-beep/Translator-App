@@ -1,30 +1,30 @@
 import streamlit as st
-from deep_translator import GoogleTranslator
+from deep_translator import MyMemoryTranslator
 
 st.title("AI Translator App")
 st.write("Translate text between languages instantly.")
 
 languages = {
-    "english": "en",
-    "telugu": "te",
-    "hindi": "hi",
-    "tamil": "ta",
-    "kannada": "kn",
-    "french": "fr",
-    "spanish": "es",
-    "german": "de",
-    "chinese (simplified)": "zh-CN",
-    "japanese": "ja",
-    "arabic": "ar",
-    "russian": "ru",
-    "malayalam": "ml",
-    "marathi": "mr",
-    "urdu": "ur",
-    "bengali": "bn",
-    "gujarati": "gu",
-    "punjabi": "pa",
-    "portuguese": "pt",
-    "italian": "it",
+    "english": "en-US",
+    "telugu": "te-IN",
+    "hindi": "hi-IN",
+    "tamil": "ta-IN",
+    "kannada": "kn-IN",
+    "french": "fr-FR",
+    "spanish": "es-ES",
+    "german": "de-DE",
+    "japanese": "ja-JP",
+    "arabic": "ar-SA",
+    "russian": "ru-RU",
+    "malayalam": "ml-IN",
+    "marathi": "mr-IN",
+    "urdu": "ur-PK",
+    "bengali": "bn-IN",
+    "gujarati": "gu-IN",
+    "punjabi": "pa-IN",
+    "portuguese": "pt-PT",
+    "italian": "it-IT",
+    "chinese": "zh-CN",
 }
 
 lang_names = list(languages.keys())
@@ -32,10 +32,10 @@ lang_names = list(languages.keys())
 col1, col2 = st.columns(2)
 
 with col1:
-    source_lang = st.selectbox("From Language", ["auto"] + lang_names, index=0)
+    source_lang = st.selectbox("From Language", lang_names, index=lang_names.index("english"))
 
 with col2:
-    target_lang = st.selectbox("To Language", lang_names, index=lang_names.index("english"))
+    target_lang = st.selectbox("To Language", lang_names, index=lang_names.index("telugu"))
 
 text = st.text_area("Enter text to translate:")
 
@@ -44,9 +44,9 @@ if st.button("Translate"):
         st.warning("Please enter some text.")
     else:
         try:
-            source_code = "auto" if source_lang == "auto" else languages[source_lang]
+            source_code = languages[source_lang]
             target_code = languages[target_lang]
-            translated = GoogleTranslator(source=source_code, target=target_code).translate(text)
+            translated = MyMemoryTranslator(source=source_code, target=target_code).translate(text)
             st.subheader("Translated Text:")
             st.success(translated)
         except Exception as e:
