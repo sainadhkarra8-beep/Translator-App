@@ -3,8 +3,12 @@ from deep_translator import GoogleTranslator
 
 st.title("AI Translator App")
 st.write("Translate text between languages instantly.")
+@st.cache_data
+def get_languages():
+    return GoogleTranslator().get_supported_languages(as_dict=True)
 
-languages = GoogleTranslator().get_supported_languages(as_dict=True)
+languages = get_languages()
+
 lang_names = list(languages.keys())
 
 col1, col2 = st.columns(2)
