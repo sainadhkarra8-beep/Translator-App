@@ -6,7 +6,7 @@ st.write("Translate text between languages instantly.")
 
 @st.cache_data
 def get_languages():
-    return MyMemoryTranslator().get_supported_languages(as_dict=True)
+  return MyMemoryTranslator(source='en', target='es').get_supported_languages(as_dict=True)  
 
 languages = get_languages()
 lang_names = list(languages.keys())
